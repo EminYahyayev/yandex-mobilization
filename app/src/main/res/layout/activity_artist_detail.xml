@@ -46,33 +46,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/content_padding_normal"
-            android:paddingTop="@dimen/content_padding_normal">
-
-            <TextView
-                android:id="@+id/artist_detail_description_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/element_spacing_normal"
-                android:layout_marginEnd="@dimen/keyline_1"
-                android:layout_marginStart="@dimen/keyline_1"
-                android:text="@string/artist_detail_biography"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
-
-            <TextView
-                android:id="@+id/artist_detail_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/keyline_1"
-                android:layout_marginStart="@dimen/keyline_1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                tools:text="@string/artist_description"/>
-
-        </LinearLayout>
+        <include layout="@layout/partial_artist_detail"/>
 
     </android.support.v4.widget.NestedScrollView>
 

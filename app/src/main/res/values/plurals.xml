@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <plurals name="artist_detail_albums">
+        <item quantity="zero">No albums</item>
+        <item quantity="one">%d album</item>
+        <item quantity="two">%d albums</item>
+        <item quantity="few">%d albums</item>
+        <item quantity="many">%d albums</item>
+        <item quantity="other">%d albums</item>
+    </plurals>
+
+    <plurals name="artist_detail_tracks">
+        <item quantity="zero">No tracks</item>
+        <item quantity="one">%d track</item>
+        <item quantity="two">%d tracks</item>
+        <item quantity="few">%d tracks</item>
+        <item quantity="many">%d tracks</item>
+        <item quantity="other">%d tracks</item>
+    </plurals>
+
+</resources>

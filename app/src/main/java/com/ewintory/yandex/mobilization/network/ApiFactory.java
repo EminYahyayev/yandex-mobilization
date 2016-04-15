@@ -52,7 +52,7 @@ public final class ApiFactory {
         Context appContext = context.getApplicationContext();
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
         // Install an HTTP cache in the application cache directory.
         File cacheDir = new File(appContext.getCacheDir(), "http");

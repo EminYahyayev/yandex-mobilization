@@ -10,7 +10,11 @@
     <string name="action_about">About</string>
 
     <!-- Artists -->
-    <string name="articles_error">Error occurred.</string>
+    <string name="artists_error">Error occurred.</string>
+
+    <!-- Artist detail -->
+    <string name="artist_detail_albums">%1$s albums</string>
+    <string name="artist_detail_songs">%1$s songs</string>
 
     <!-- About -->
     <string name="about_message">Yandex.Mobilisation 2016</string>

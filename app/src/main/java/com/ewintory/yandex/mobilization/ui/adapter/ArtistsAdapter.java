@@ -110,7 +110,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
             //noinspection unchecked
             Glide.with(mFragmentReference.get())
                     .load(coverUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .crossFade(200)
                     .placeholder(R.color.artist_image_placeholder)
                     .error(R.color.artist_image_error)

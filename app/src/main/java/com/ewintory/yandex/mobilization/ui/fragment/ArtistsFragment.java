@@ -67,11 +67,6 @@ public final class ArtistsFragment extends BaseFragment
     public void onCreate(@Nullable Bundle savedState) {
         super.onCreate(savedState);
         mYandexApi = ApiFactory.createApi(getContext(), YandexApi.class);
-
-        if (savedState != null && savedState.containsKey(STATE_ARTISTS)) {
-            mArtists = savedState.getParcelableArrayList(STATE_ARTISTS);
-            updateContent();
-        }
     }
 
     @Override
@@ -97,6 +92,12 @@ public final class ArtistsFragment extends BaseFragment
 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mArtistsAdapter);
+
+        if (savedState != null && savedState.containsKey(STATE_ARTISTS)) {
+            Timber.i("Artists was saved!");
+            mArtists = savedState.getParcelableArrayList(STATE_ARTISTS);
+            updateContent();
+        }
     }
 
     @Override
@@ -117,9 +118,9 @@ public final class ArtistsFragment extends BaseFragment
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         if (mArtists != null)
             outState.putParcelableArrayList(STATE_ARTISTS, new ArrayList<Parcelable>(mArtists));
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -164,7 +165,8 @@ public final class ArtistsFragment extends BaseFragment
                 mErrorView.setVisibility(View.VISIBLE);
         }
 
-        mArtistsAdapter.setArtists(mArtists);
+        if (mArtistsAdapter != null)
+            mArtistsAdapter.setArtists(mArtists);
     }
 
     @Override

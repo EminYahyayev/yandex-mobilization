@@ -8,7 +8,7 @@
     <string name="action_about">О программе</string>
 
     <!-- Artists -->
-    <string name="articles_error">Ошибка в закрузке исполнителей.</string>
+    <string name="artists_error">Ошибка в закрузке исполнителей.</string>
 
     <!-- About -->
     <string name="about_message">Яндекс.Мобилизация 2016</string>
