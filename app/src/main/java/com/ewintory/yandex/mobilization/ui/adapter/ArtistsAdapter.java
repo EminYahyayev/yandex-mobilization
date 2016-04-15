@@ -30,11 +30,11 @@ import butterknife.ButterKnife;
 public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder> {
 
     public interface OnArtistClickListener {
-        void onArtistClick(Artist artist);
-
         OnArtistClickListener DUMMY = new OnArtistClickListener() {
             @Override public void onArtistClick(Artist artist) {/** dummy */}
         };
+
+        void onArtistClick(Artist artist);
     }
 
     private final WeakReference<Fragment> mFragmentReference;
@@ -106,6 +106,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
                     .setPaletteBuilderInterceptor(new ArtistsPaletteBuilderInterceptor())
                     .intoCallBack(holder);
 
+            //noinspection unchecked
             Glide.with(mFragmentReference.get())
                     .load(coverUrl)
                     .crossFade(200)

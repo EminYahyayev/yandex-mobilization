@@ -46,7 +46,7 @@ public final class ArtistsFragment extends BaseFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         return inflater.inflate(R.layout.fragment_artists, container, false);
     }
 
