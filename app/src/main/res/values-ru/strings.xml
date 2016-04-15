@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Яндекс.Мобилизация</string>
+
+    <!-- Titles -->
+    <string name="title_main">Исполнители</string>
+
+    <!-- Actions -->
+    <string name="action_about">О программе</string>
+
+    <!-- Artists -->
+    <string name="articles_error">Ошибка в закрузке исполнителей.</string>
+
+    <!-- About -->
+    <string name="about_message">Яндекс.Мобилизация 2016</string>
+    <string name="title_about">О программе</string>
+
+</resources>

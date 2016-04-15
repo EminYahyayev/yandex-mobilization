@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lorem_ipsum" translatable="false">Lorem Ipsum is simply dummy text of the printing
+        and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+        type specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+        with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
+        desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </string>
+
+    <string name="artist_name" translatable="false">Lana Del Rey</string>
+    <string name="artist_description" translatable="false">американская певица, автор-исполнитель,
+        композитор и модель. Начала свою карьеру в Нью-Йорке в 2005 году, но известность пришла к
+        ней только в 2011 году, когда был выпущен видеоклип на сингл «Video Games», который уже
+        через месяц стал интернет-сенсацией.
+    </string>
+    <string name="artist_link" translatable="false">http://www.lanadelrey.com/</string>
+    <string name="artist_tracks" translatable="false">90</string>
+    <string name="artist_albums" translatable="false">23</string>
+    <string name="artist_genres" translatable="false">pop, dance</string>
+
+</resources>

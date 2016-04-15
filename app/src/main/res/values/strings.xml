@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Yandex.Mobilization</string>
+
+    <!-- Titles -->
+    <string name="title_main">Artists</string>
+    <string name="title_about">About</string>
+
+    <!-- Actions -->
+    <string name="action_about">About</string>
+
+    <!-- Artists -->
+    <string name="articles_error">Error occurred.</string>
+
+    <!-- About -->
+    <string name="about_message">Yandex.Mobilisation 2016</string>
+
+</resources>

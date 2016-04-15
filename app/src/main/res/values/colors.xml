@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="body_text_1">#de000000</color>
+    <color name="body_text_2">#8a000000</color>
+    <color name="body_text_3">#60000000</color>
+    <color name="body_text_white">#FFFFFFFF</color>
+    <color name="body_text_disabled">#44000000</color>
+
+    <color name="body_text_1_inverse">#deffffff</color>
+    <color name="body_text_2_inverse">#8affffff</color>
+
+    <color name="primary">@color/material_red600</color>
+    <color name="primary_dark">@color/material_red800</color>
+    <color name="primary_light">@color/material_red100</color>
+    <color name="accent">@color/material_amberA700</color>
+    <!--<color name="primary">@color/material_purple400</color>-->
+    <!--<color name="primary_dark">@color/material_purple500</color>-->
+    <!--<color name="primary_light">@color/material_purple100</color>-->
+    <!--<color name="accent">@color/material_greenA200</color>-->
+
+    <color name="artist_footer_background">@color/primary</color>
+    <color name="artist_image_placeholder">@color/primary_dark</color>
+    <color name="artist_image_error">@color/material_red100</color>
+
+    <array name="swipe_progress_colors">
+        <item>@color/accent</item>
+        <item>@color/primary</item>
+    </array>
+
+</resources>

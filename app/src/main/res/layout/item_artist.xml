@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_spacing_half"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground"
+    tools:layout_margin="@dimen/item_spacing_full">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.ewintory.yandex.mobilization.ui.widget.AspectLockedImageView
+            android:id="@+id/artist_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/artist_cover_big"
+            app:aspectRatio="@dimen/artist_item_image_ratio"/>
+
+        <RelativeLayout
+            android:id="@+id/artist_item_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/artist_footer_background"
+            android:orientation="vertical"
+            android:padding="@dimen/content_padding_normal">
+
+            <TextView
+                android:id="@+id/artist_item_name"
+                style="@style/ArtistItemText"
+                android:lines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/body_text_white"
+                android:textStyle="bold"
+                tools:text="@string/artist_name"/>
+
+            <TextView
+                android:id="@+id/artist_item_genres"
+                style="@style/ArtistItemText"
+                android:layout_below="@id/artist_item_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/body_text_1_inverse"
+                tools:text="@string/artist_genres"/>
+
+            <ImageView
+                android:id="@+id/artist_item_albums_icon"
+                android:layout_width="@dimen/artist_item_icon_size"
+                android:layout_height="@dimen/artist_item_icon_size"
+                android:layout_below="@id/artist_item_genres"
+                android:layout_marginTop="@dimen/element_spacing_normal"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_album_white_18dp"/>
+
+            <TextView
+                android:id="@+id/artist_item_albums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/artist_item_albums_icon"
+                android:layout_alignTop="@id/artist_item_albums_icon"
+                android:layout_marginStart="@dimen/artist_item_icon_spacing"
+                android:layout_toEndOf="@id/artist_item_albums_icon"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/body_text_white"
+                tools:text="@string/artist_albums"/>
+
+
+            <ImageView
+                android:id="@+id/artist_item_tracks_icon"
+                android:layout_width="@dimen/artist_item_icon_size"
+                android:layout_height="@dimen/artist_item_icon_size"
+                android:layout_alignTop="@id/artist_item_albums_icon"
+                android:layout_marginStart="@dimen/element_spacing_normal"
+                android:layout_toEndOf="@id/artist_item_albums"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_music_note_white_18dp"/>
+
+            <TextView
+                android:id="@+id/artist_item_tracks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/artist_item_albums_icon"
+                android:layout_alignTop="@id/artist_item_albums_icon"
+                android:layout_marginStart="@dimen/artist_item_icon_spacing"
+                android:layout_toEndOf="@id/artist_item_tracks_icon"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/body_text_white"
+                tools:text="@string/artist_tracks"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
