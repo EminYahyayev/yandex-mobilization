@@ -39,6 +39,7 @@
     <!-- Artists -->
     <!--<item name="artist_item_image_ratio" format="float" type="dimen">1.6</item>-->
     <item name="artist_item_image_ratio" format="float" type="dimen">1</item>
+    <item name="artist_detail_image_ratio" format="float" type="dimen">1</item>
     <dimen name="artist_item_icon_size">18sp</dimen>
     <dimen name="artist_item_icon_spacing">2dp</dimen>
 

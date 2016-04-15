@@ -3,6 +3,7 @@
 
     <!-- Titles -->
     <string name="title_main">Artists</string>
+    <string name="title_artist_detail">Artist</string>
     <string name="title_about">About</string>
 
     <!-- Actions -->
@@ -13,5 +14,6 @@
 
     <!-- About -->
     <string name="about_message">Yandex.Mobilisation 2016</string>
+    <string name="artist_detail_biography">Biography</string>
 
 </resources>

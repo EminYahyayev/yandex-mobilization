@@ -1,21 +1,20 @@
 package com.ewintory.yandex.mobilization.model;
 
-import android.support.annotation.StringDef;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * A model class for an artist
  */
-public final class Artist {
+public final class Artist implements Parcelable {
 
-    public static final String COVER_TYPE_SMALL = "small";
-    public static final String COVER_TYPE_BIG = "big";
+    public static final Parcelable.Creator<Artist> CREATOR = new Parcelable.Creator<Artist>() {
+        @Override public Artist createFromParcel(Parcel source) {return new Artist(source);}
 
-    @StringDef({COVER_TYPE_BIG, COVER_TYPE_SMALL})
-    public @interface CoverType {}
-
+        @Override public Artist[] newArray(int size) {return new Artist[size];}
+    };
     private long id;
     private String name;
     private List<String> genres;
@@ -23,7 +22,22 @@ public final class Artist {
     private int albums;
     private String link;
     private String description;
-    private Map<String, String> covers;
+    private String smallCover;
+    private String bigCover;
+
+    public Artist() {}
+
+    protected Artist(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.genres = in.createStringArrayList();
+        this.tracks = in.readInt();
+        this.albums = in.readInt();
+        this.link = in.readString();
+        this.description = in.readString();
+        this.smallCover = in.readString();
+        this.bigCover = in.readString();
+    }
 
     public long getId() {
         return id;
@@ -88,20 +102,26 @@ public final class Artist {
         return this;
     }
 
-    public Map<String, String> getCovers() {
-        return covers;
+    public String getSmallCover() {
+        return smallCover;
     }
 
-    public Artist setCovers(Map<String, String> covers) {
-        this.covers = covers;
+    public Artist setSmallCover(String smallCover) {
+        this.smallCover = smallCover;
         return this;
     }
 
-    public String getCover(@CoverType String coverType) {
-        return covers.get(coverType);
+    public String getBigCover() {
+        return bigCover;
     }
 
-    @Override public String toString() {
+    public Artist setBigCover(String bigCover) {
+        this.bigCover = bigCover;
+        return this;
+    }
+
+    @Override
+    public String toString() {
         return "Artist{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -110,7 +130,24 @@ public final class Artist {
                 ", albums=" + albums +
                 ", link='" + link + '\'' +
                 ", description='" + description + '\'' +
-                ", covers=" + covers +
+                ", smallCover='" + smallCover + '\'' +
+                ", bigCover='" + bigCover + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() { return 0; }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeStringList(this.genres);
+        dest.writeInt(this.tracks);
+        dest.writeInt(this.albums);
+        dest.writeString(this.link);
+        dest.writeString(this.description);
+        dest.writeString(this.smallCover);
+        dest.writeString(this.bigCover);
     }
 }

@@ -8,14 +8,14 @@
     android:layout_height="match_parent"
     android:clipToPadding="false">
 
-    <include layout="@layout/partial_app_bar_toolbar_overlap"/>
+    <include layout="@layout/partial_app_bar_toolbar"/>
 
     <fragment
         android:id="@+id/fragment_container"
         android:name="com.ewintory.yandex.mobilization.ui.fragment.ArtistsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:behavior_overlapTop="64dp"
+        app:behavior_overlapTop="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout="@layout/fragment_artists"/>
 

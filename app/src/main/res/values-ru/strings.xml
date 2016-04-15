@@ -13,5 +13,7 @@
     <!-- About -->
     <string name="about_message">Яндекс.Мобилизация 2016</string>
     <string name="title_about">О программе</string>
+    <string name="artist_detail_biography">Биография</string>
+    <string name="title_artist_detail">Исполнитель</string>
 
 </resources>

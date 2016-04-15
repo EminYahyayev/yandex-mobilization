@@ -1,17 +1,23 @@
 package com.ewintory.yandex.mobilization.ui.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ewintory.yandex.mobilization.R;
+import com.ewintory.yandex.mobilization.model.Artist;
+import com.ewintory.yandex.mobilization.ui.fragment.ArtistsFragment;
 
 import butterknife.Bind;
+import timber.log.Timber;
 
-public final class MainActivity extends BaseActivity {
+public final class MainActivity extends BaseActivity
+        implements ArtistsFragment.Listener {
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
 
@@ -46,5 +52,13 @@ public final class MainActivity extends BaseActivity {
             return true;
         } else
             return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onArtistSelected(@NonNull Artist artist) {
+        Timber.d("Artist selected: name=%s", artist.getName());
+        Intent intent = new Intent(this, ArtistDetailActivity.class);
+        intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST, artist);
+        startActivity(intent);
     }
 }
