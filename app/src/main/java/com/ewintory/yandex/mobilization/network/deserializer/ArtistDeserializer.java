@@ -10,12 +10,13 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public final class ArtistDeserializer implements JsonDeserializer<Artist> {
+
+    private static String safeGetString(JsonElement element) {
+        return (element != null) ? element.getAsString() : null;
+    }
 
     @Override
     public Artist deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -27,13 +28,15 @@ public final class ArtistDeserializer implements JsonDeserializer<Artist> {
         final String link = safeGetString(jsonObject.get("link"));
         final String description = safeGetString(jsonObject.get("description"));
 
-        final JsonArray genreArray = jsonObject.get("genres").getAsJsonArray();
         final int tracks = jsonObject.get("tracks").getAsInt();
         final int albums = jsonObject.get("albums").getAsInt();
-        final JsonObject coverObject = jsonObject.get("cover").getAsJsonObject();
 
-        List<String> genres = toStringList(genreArray);
-        Map<String, String> covers = toStringMap(coverObject);
+        final JsonArray genreArray = jsonObject.get("genres").getAsJsonArray();
+        final List<String> genres = toStringList(genreArray);
+
+        final JsonObject coverObject = jsonObject.get("cover").getAsJsonObject();
+        final String bigCover = safeGetString(coverObject.get("big"));
+        final String smallCover = safeGetString(coverObject.get("small"));
 
         return new Artist()
                 .setId(id)
@@ -43,11 +46,8 @@ public final class ArtistDeserializer implements JsonDeserializer<Artist> {
                 .setAlbums(albums)
                 .setLink(link)
                 .setDescription(description)
-                .setCovers(covers);
-    }
-
-    private static String safeGetString(JsonElement element) {
-        return (element != null) ? element.getAsString() : null;
+                .setSmallCover(smallCover)
+                .setBigCover(bigCover);
     }
 
     private static List<String> toStringList(JsonArray array) {
@@ -56,15 +56,6 @@ public final class ArtistDeserializer implements JsonDeserializer<Artist> {
             list.add(element.getAsString());
         }
         return list;
-    }
-
-    private static Map<String, String> toStringMap(JsonObject object) {
-        Set<Map.Entry<String, JsonElement>> set = object.entrySet();
-        Map<String, String> map = new HashMap<>(set.size());
-        for (Map.Entry<String, JsonElement> entry : set) {
-            map.put(entry.getKey(), entry.getValue().getAsString());
-        }
-        return map;
     }
 
 }

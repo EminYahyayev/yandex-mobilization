@@ -3,6 +3,10 @@ package com.ewintory.yandex.mobilization;
 import android.app.Application;
 import android.content.Context;
 
+import com.ewintory.yandex.mobilization.di.AppModule;
+import com.ewintory.yandex.mobilization.di.DaggerNetworkComponent;
+import com.ewintory.yandex.mobilization.di.NetworkComponent;
+import com.ewintory.yandex.mobilization.di.NetworkModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -11,7 +15,8 @@ import timber.log.Timber;
 
 public final class YandexApplication extends Application {
 
-    private RefWatcher refWatcher;
+    private NetworkComponent mNetworkComponent;
+    private RefWatcher mRefWatcher;
 
     public static YandexApplication get(Context context) {
         return (YandexApplication) context.getApplicationContext();
@@ -21,15 +26,24 @@ public final class YandexApplication extends Application {
     public final void onCreate() {
         super.onCreate();
 
-        refWatcher = BuildConfig.DEBUG
+        mRefWatcher = BuildConfig.DEBUG
                 ? LeakCanary.install(this)
                 : RefWatcher.DISABLED;
 
         configureTimber();
+
+        mNetworkComponent = DaggerNetworkComponent.builder()
+                .appModule(new AppModule(this))
+                .networkModule(new NetworkModule())
+                .build();
+    }
+
+    public NetworkComponent getNetworkComponent() {
+        return mNetworkComponent;
     }
 
     public RefWatcher getRefWatcher() {
-        return refWatcher;
+        return mRefWatcher;
     }
 
     private void configureTimber() {

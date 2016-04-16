@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <com.ewintory.yandex.mobilization.ui.widget.AspectLockedImageView
-            android:id="@+id/artist_item_image"
+            android:id="@+id/artist_item_cover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@null"

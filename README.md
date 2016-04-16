@@ -5,41 +5,44 @@
 ## Требования
 
 > Напишите приложение для платформы Android на языке Java. Чтобы вам было легче, мы подготовили примерный вид экранов тестового приложения и набор данных.
-
+>
 > Минимальная функциональность:
-> — На первом экране нужно показать список имен исполнителей популярной музыки.
-> — На следующем экране — подробную информацию о выбранном исполнителе.
-> — Исходные данные приложение получает по сети в формате JSON. JSON доступен по ссылке: download.cdn.yandex.net/mobilization-2016/artists.json.
-
+> * На первом экране нужно показать список имен исполнителей популярной музыки.
+> * На следующем экране — подробную информацию о выбранном исполнителе.
+> * Исходные данные приложение получает по сети в формате JSON. JSON доступен по ссылке: [download.cdn.yandex.net/mobilization-2016/artists.json](http://download.cdn.yandex.net/mobilization-2016/artists.json)
+>
 > Наш ведущий разработчик, который будет проверять выполненные задания, очень радуется, когда встречает:
-
-> — комментарии в коде;
-> — обработку ошибок;
-> — анимацию;
-> — кеширование (например, можно научить приложение сохранять предыдущий ответ сервера);
-> — тесты.
-
+>
+> * комментарии в коде;
+> * обработку ошибок;
+> * анимацию;
+> * кеширование (например, можно научить приложение сохранять предыдущий ответ сервера);
+> * тесты.
+>
 > Результат пришлите в виде двух ссылок — на GitHub-репозиторий с исходным кодом (Java) и на файл apk.
-
+>
 > Реализуйте приложение удобным для вас способом, но только на Java. Используйте любые инструменты и библиотеки. Мы будем оценивать качество кода, а не его объём.
 
-## Скрины
+## Примерный вид экранов
 
-![screen](../master/art/provided/artists-list.png)
-
-![screen](../master/art/provided/artists-detail.png)
+<img src="../master/art/provided/artists-list.png" width="250">
+<img src="../master/art/provided/artists-detail.png" width="250">
 
 ## Библиотеки
 
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
-* [Retrofit](https://github.com/square/retrofit)
+* [Timber](https://github.com/JakeWharton/timber)
+* [Dagger 2](https://github.com/google/dagger)
+* [Retrofit 2](https://github.com/square/retrofit)
+* [OkHttp 3](https://github.com/square/okhttp)
+* [Gson](https://github.com/google/gson)
 * [Glide](https://github.com/bumptech/glide)
 * [GlidePalette](https://github.com/florent37/GlidePalette)
 
 ## Школа мобильной разработки Яндекса
 
-[Описание](https://academy.yandex.ru/events/mobdev/msk-2016/)
-[Регистрация](https://academy.yandex.ru/events/mobdev/msk-2016/register/)
+* [Описание](https://academy.yandex.ru/events/mobdev/msk-2016/)
+* [Регистрация](https://academy.yandex.ru/events/mobdev/msk-2016/register/)
 
 ## License
 

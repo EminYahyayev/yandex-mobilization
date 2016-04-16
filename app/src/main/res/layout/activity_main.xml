@@ -8,14 +8,16 @@
     android:layout_height="match_parent"
     android:clipToPadding="false">
 
+    <include layout="@layout/partial_app_bar_toolbar"/>
+
     <fragment
-        android:id="@+id/fragment_container"
+        android:id="@+id/fragment_artists"
+        android:tag="fragment_artists"
         android:name="com.ewintory.yandex.mobilization.ui.fragment.ArtistsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:behavior_overlapTop="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout="@layout/fragment_artists"/>
-
-    <include layout="@layout/partial_app_bar_toolbar"/>
 
 </android.support.design.widget.CoordinatorLayout>

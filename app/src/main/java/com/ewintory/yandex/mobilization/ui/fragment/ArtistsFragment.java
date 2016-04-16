@@ -1,6 +1,9 @@
 package com.ewintory.yandex.mobilization.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,12 +14,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ewintory.yandex.mobilization.R;
+import com.ewintory.yandex.mobilization.YandexApplication;
 import com.ewintory.yandex.mobilization.model.Artist;
-import com.ewintory.yandex.mobilization.network.ApiFactory;
 import com.ewintory.yandex.mobilization.network.YandexApi;
 import com.ewintory.yandex.mobilization.ui.adapter.ArtistsAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import retrofit2.Call;
@@ -30,23 +36,43 @@ import timber.log.Timber;
 public final class ArtistsFragment extends BaseFragment
         implements Callback<List<Artist>>, ArtistsAdapter.OnArtistClickListener {
 
+    public interface Listener {
+        void onArtistSelected(@NonNull Artist artist);
+
+        Listener DUMMY = new Listener() {
+            @Override public void onArtistSelected(@NonNull Artist artist) {/** dummy */}
+        };
+    }
+
+    private static final String STATE_ARTISTS = "state_artists";
+
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
     @Bind(R.id.progress_bar) ContentLoadingProgressBar mProgressBar;
     @Bind(R.id.error_view) TextView mErrorView;
 
-    private ArtistsAdapter mArtistsAdapter;
+    @Inject YandexApi mYandexApi;
 
-    private YandexApi mYandexApi;
+    private Listener mListener = Listener.DUMMY;
+    private ArtistsAdapter mArtistsAdapter;
+    private List<Artist> mArtists;
     private Call<List<Artist>> mArtistsCall;
+
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        if (!(getActivity() instanceof Listener))
+            throw new ClassCastException("Activity must implement Listener interface");
+
+        mListener = (Listener) getActivity();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedState) {
         super.onCreate(savedState);
-        mYandexApi = ApiFactory.createApi(getContext(), YandexApi.class);
+        YandexApplication.get(getContext()).getNetworkComponent().inject(this);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         return inflater.inflate(R.layout.fragment_artists, container, false);
     }
 
@@ -68,13 +94,21 @@ public final class ArtistsFragment extends BaseFragment
 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mArtistsAdapter);
+
+        if (savedState != null && savedState.containsKey(STATE_ARTISTS)) {
+            Timber.i("Artists was saved!");
+            mArtists = savedState.getParcelableArrayList(STATE_ARTISTS);
+            updateContent();
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mArtistsCall = mYandexApi.artists();
-        mArtistsCall.enqueue(this);
+        if (mArtists == null) {
+            mArtistsCall = mYandexApi.artists();
+            mArtistsCall.enqueue(this);
+        }
     }
 
     @Override
@@ -85,39 +119,60 @@ public final class ArtistsFragment extends BaseFragment
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mArtists != null)
+            outState.putParcelableArrayList(STATE_ARTISTS, new ArrayList<Parcelable>(mArtists));
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         mArtistsAdapter.setListener(DUMMY);
     }
 
     @Override
+    public void onDetach() {
+        mListener = Listener.DUMMY;
+        super.onDetach();
+    }
+
+    @Override
     public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
-        if (mProgressBar != null)
-            mProgressBar.hide();
-
-        if (mErrorView != null)
-            mErrorView.setVisibility(response.isSuccessful() ? View.GONE : View.VISIBLE);
-
-        if (response.isSuccessful()) {
-            mArtistsAdapter.setArtists(response.body());
-        } else {
-            mArtistsAdapter.setArtists(null);
+        if (!response.isSuccessful()) {
             Timber.e("Artists call wasn't successful");
+            mArtists = null;
+        } else {
+            mArtists = response.body();
         }
+        updateContent();
     }
 
     @Override
     public void onFailure(Call<List<Artist>> call, Throwable t) {
+        Timber.e(t.getMessage());
+        mArtists = null;
+        updateContent();
+    }
+
+    private void updateContent() {
         if (mProgressBar != null)
             mProgressBar.hide();
-        mArtistsAdapter.setArtists(null);
-        if (mErrorView != null)
-            mErrorView.setVisibility(View.VISIBLE);
-        Timber.e(t.getMessage());
+
+        if (mArtists != null) {
+            if (mErrorView != null)
+                mErrorView.setVisibility(View.GONE);
+        } else {
+            if (mErrorView != null)
+                mErrorView.setVisibility(View.VISIBLE);
+        }
+
+        if (mArtistsAdapter != null)
+            mArtistsAdapter.setArtists(mArtists);
     }
 
     @Override
-    public void onArtistClick(Artist artist) {
-        Timber.d("onArtistClick: name=%s", artist.getName());
+    public void onArtistItemClick(@NonNull Artist artist) {
+        mListener.onArtistSelected(artist);
     }
 }

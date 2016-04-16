@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ewintory.yandex.mobilization.R;
 import com.ewintory.yandex.mobilization.model.Artist;
 import com.ewintory.yandex.mobilization.utils.ArtistsPaletteBuilderInterceptor;
@@ -30,11 +31,11 @@ import butterknife.ButterKnife;
 public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder> {
 
     public interface OnArtistClickListener {
-        void onArtistClick(Artist artist);
-
         OnArtistClickListener DUMMY = new OnArtistClickListener() {
-            @Override public void onArtistClick(Artist artist) {/** dummy */}
+            @Override public void onArtistItemClick(@NonNull Artist artist) {/** dummy */}
         };
+
+        void onArtistItemClick(@NonNull Artist artist);
     }
 
     private final WeakReference<Fragment> mFragmentReference;
@@ -100,26 +101,28 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
             holder.resetColors();
         }
 
-        final String coverUrl = artist.getCover(Artist.COVER_TYPE_SMALL);
+        final String coverUrl = artist.getSmallCover();
         if (!mFragmentReference.isEnqueued()) {
             GlidePalette listener = GlidePalette.with(coverUrl)
                     .setPaletteBuilderInterceptor(new ArtistsPaletteBuilderInterceptor())
                     .intoCallBack(holder);
 
+            //noinspection unchecked
             Glide.with(mFragmentReference.get())
                     .load(coverUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .crossFade(200)
                     .placeholder(R.color.artist_image_placeholder)
                     .error(R.color.artist_image_error)
                     .listener(listener)
-                    .into(holder.imageView);
+                    .into(holder.coverView);
         }
     }
 
     final class ArtistHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, BitmapPalette.CallBack {
 
-        @Bind(R.id.artist_item_image) ImageView imageView;
+        @Bind(R.id.artist_item_cover) ImageView coverView;
         @Bind(R.id.artist_item_name) TextView nameView;
         @Bind(R.id.artist_item_genres) TextView genresView;
         @Bind(R.id.artist_item_tracks) TextView tracksView;
@@ -143,7 +146,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
 
         @Override
         public void onClick(View v) {
-            mListener.onArtistClick(getArtist(getAdapterPosition()));
+            mListener.onArtistItemClick(getArtist(getAdapterPosition()));
         }
 
         @Override
