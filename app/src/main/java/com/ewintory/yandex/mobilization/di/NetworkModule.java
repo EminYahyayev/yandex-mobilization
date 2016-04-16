@@ -8,6 +8,7 @@ import com.ewintory.yandex.mobilization.BuildConfig;
 import com.ewintory.yandex.mobilization.model.Artist;
 import com.ewintory.yandex.mobilization.network.YandexApi;
 import com.ewintory.yandex.mobilization.network.deserializer.ArtistDeserializer;
+import com.ewintory.yandex.mobilization.utils.CacheControlInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -52,15 +53,18 @@ public final class NetworkModule {
     }
 
     @Provides
-    @Singleton OkHttpClient provideOkHttpClient(Cache cache) {
+    @Singleton OkHttpClient provideOkHttpClient(final Application application, Cache cache) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(BuildConfig.DEBUG ? Level.BASIC : Level.NONE);
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         clientBuilder.connectTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         clientBuilder.readTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-        clientBuilder.cache(cache);
+        // Offline cache support
+        clientBuilder.addInterceptor(new CacheControlInterceptor(application));
+        clientBuilder.addNetworkInterceptor(new CacheControlInterceptor(application));
         clientBuilder.addInterceptor(logging);
+        clientBuilder.cache(cache);
         return clientBuilder.build();
     }
 

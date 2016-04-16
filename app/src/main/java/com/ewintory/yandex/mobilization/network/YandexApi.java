@@ -13,7 +13,6 @@ public interface YandexApi {
     String API_BASE_URL = "http://download.cdn.yandex.net/mobilization-2016/";
 
     @Headers({
-            "Cache-Control: max-age=640000, max-stale=0",
             "User-Agent: Yandex-Mobilization-App"
     })
     @GET("artists.json") Call<List<Artist>> artists();
