@@ -17,6 +17,7 @@ import com.ewintory.yandex.mobilization.R;
 import com.ewintory.yandex.mobilization.YandexApplication;
 import com.ewintory.yandex.mobilization.model.Artist;
 import com.ewintory.yandex.mobilization.network.YandexApi;
+import com.ewintory.yandex.mobilization.ui.adapter.ArtistItemAnimator;
 import com.ewintory.yandex.mobilization.ui.adapter.ArtistsAdapter;
 
 import java.util.ArrayList;
@@ -85,6 +86,7 @@ public final class ArtistsFragment extends BaseFragment
         mArtistsAdapter.setListener(this);
 
         final int spanCount = getResources().getInteger(R.integer.artists_columns);
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(spanCount, VERTICAL);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override public int getSpanSize(int position) {
@@ -94,6 +96,7 @@ public final class ArtistsFragment extends BaseFragment
         });
 
         mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setItemAnimator(new ArtistItemAnimator(spanCount));
         mRecyclerView.setAdapter(mArtistsAdapter);
 
         if (savedState != null && savedState.containsKey(STATE_ARTISTS)) {

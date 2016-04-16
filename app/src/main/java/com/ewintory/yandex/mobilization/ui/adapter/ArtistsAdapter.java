@@ -119,7 +119,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
         }
     }
 
-    final class ArtistHolder extends RecyclerView.ViewHolder
+    public final class ArtistHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, BitmapPalette.CallBack {
 
         @Bind(R.id.artist_item_cover) ImageView coverView;
