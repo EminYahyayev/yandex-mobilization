@@ -14,13 +14,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ewintory.yandex.mobilization.R;
+import com.ewintory.yandex.mobilization.YandexApplication;
 import com.ewintory.yandex.mobilization.model.Artist;
-import com.ewintory.yandex.mobilization.network.ApiFactory;
 import com.ewintory.yandex.mobilization.network.YandexApi;
 import com.ewintory.yandex.mobilization.ui.adapter.ArtistsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import retrofit2.Call;
@@ -48,11 +50,11 @@ public final class ArtistsFragment extends BaseFragment
     @Bind(R.id.progress_bar) ContentLoadingProgressBar mProgressBar;
     @Bind(R.id.error_view) TextView mErrorView;
 
+    @Inject YandexApi mYandexApi;
+
     private Listener mListener = Listener.DUMMY;
     private ArtistsAdapter mArtistsAdapter;
     private List<Artist> mArtists;
-
-    private YandexApi mYandexApi;
     private Call<List<Artist>> mArtistsCall;
 
     @Override public void onAttach(Context context) {
@@ -66,7 +68,7 @@ public final class ArtistsFragment extends BaseFragment
     @Override
     public void onCreate(@Nullable Bundle savedState) {
         super.onCreate(savedState);
-        mYandexApi = ApiFactory.createApi(getContext(), YandexApi.class);
+        YandexApplication.get(getContext()).getNetworkComponent().inject(this);
     }
 
     @Override

@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Deprecated
 public final class ApiFactory {
 
     public static final int DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
@@ -32,7 +33,7 @@ public final class ApiFactory {
         return sRetrofit.create(apiClass);
     }
 
-    public static OkHttpClient getClient(Context context) {
+    public static OkHttpClient getOkHttpClient(Context context) {
         if (sClient == null) {
             sClient = createOkHttpClient(context);
         }
@@ -43,7 +44,7 @@ public final class ApiFactory {
         Retrofit.Builder builder =
                 new Retrofit.Builder()
                         .baseUrl(API_BASE_URL)
-                        .client(getClient(context))
+                        .client(getOkHttpClient(context))
                         .addConverterFactory(GsonConverterFactory.create(createGson()));
         return builder.build();
     }

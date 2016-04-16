@@ -28,14 +28,15 @@ public final class ArtistDeserializer implements JsonDeserializer<Artist> {
         final String link = safeGetString(jsonObject.get("link"));
         final String description = safeGetString(jsonObject.get("description"));
 
-        final JsonArray genreArray = jsonObject.get("genres").getAsJsonArray();
         final int tracks = jsonObject.get("tracks").getAsInt();
         final int albums = jsonObject.get("albums").getAsInt();
+
+        final JsonArray genreArray = jsonObject.get("genres").getAsJsonArray();
+        final List<String> genres = toStringList(genreArray);
+
         final JsonObject coverObject = jsonObject.get("cover").getAsJsonObject();
         final String bigCover = safeGetString(coverObject.get("big"));
         final String smallCover = safeGetString(coverObject.get("small"));
-
-        List<String> genres = toStringList(genreArray);
 
         return new Artist()
                 .setId(id)

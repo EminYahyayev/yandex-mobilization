@@ -30,7 +30,7 @@
             android:parentActivityName=".ui.activity.MainActivity"/>
 
         <meta-data
-            android:name="com.ewintory.yandex.mobilization.network.YandexGlideModule"
+            android:name="com.ewintory.yandex.mobilization.network.GlideConfig"
             android:value="GlideModule"/>
 
     </application>
