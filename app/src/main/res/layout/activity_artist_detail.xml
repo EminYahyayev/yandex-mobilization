@@ -29,7 +29,7 @@
                 android:scaleType="centerCrop"
                 app:aspectRatio="@dimen/artist_detail_image_ratio"
                 app:layout_collapseMode="parallax"
-                tools:src="@drawable/artist_cover_big"/>
+                tools:src="@drawable/placeholder_artist_cover_big"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

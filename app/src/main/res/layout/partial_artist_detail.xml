@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/artist_detail_link"
             style="@style/ArtistDetailText"
-            android:text="@string/artist_link"/>
+            android:text="@string/placeholder_artist_link"/>
 
     </FrameLayout>
 
@@ -37,7 +37,7 @@
         <TextView
             android:id="@+id/artist_detail_albums"
             style="@style/ArtistDetailText"
-            android:text="@string/artist_albums_detail"/>
+            android:text="@string/placeholder_artist_albums_detail"/>
 
     </FrameLayout>
 
@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/artist_detail_tracks"
             style="@style/ArtistDetailText"
-            android:text="@string/artist_tracks_detail"/>
+            android:text="@string/placeholder_artist_tracks_detail"/>
 
     </FrameLayout>
 
@@ -77,6 +77,6 @@
         android:layout_marginEnd="@dimen/keyline_1"
         android:layout_marginStart="@dimen/keyline_1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="@string/artist_description"/>
+        tools:text="@string/placeholder_artist_description"/>
 
 </LinearLayout>

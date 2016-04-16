@@ -11,7 +11,7 @@ import com.ewintory.yandex.mobilization.utils.Utility;
 
 public final class ArtistItemAnimator extends DefaultItemAnimator {
 
-    private int lastAddAnimatedItem = -6;
+    private int lastAddAnimatedItem;
 
     public ArtistItemAnimator(int spanCount) {
         lastAddAnimatedItem = -3 * spanCount;
@@ -19,7 +19,7 @@ public final class ArtistItemAnimator extends DefaultItemAnimator {
 
     @Override
     public boolean canReuseUpdatedViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
-        return false;
+        return true;
     }
 
     @Override
@@ -40,10 +40,9 @@ public final class ArtistItemAnimator extends DefaultItemAnimator {
         holder.itemView.animate()
                 .translationY(0)
                 .setInterpolator(new DecelerateInterpolator(3.f))
-                .setDuration(1400)
+                .setDuration(700)
                 .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
+                    @Override public void onAnimationEnd(Animator animation) {
                         dispatchAddFinished(holder);
                     }
                 })

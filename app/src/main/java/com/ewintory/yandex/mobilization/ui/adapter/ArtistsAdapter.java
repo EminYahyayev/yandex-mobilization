@@ -32,10 +32,11 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
 
     public interface OnArtistClickListener {
         OnArtistClickListener DUMMY = new OnArtistClickListener() {
-            @Override public void onArtistItemClick(@NonNull Artist artist) {/** dummy */}
+            @Override
+            public void onArtistItemClick(@NonNull Artist artist, @NonNull ArtistHolder holder) {/** dummy */}
         };
 
-        void onArtistItemClick(@NonNull Artist artist);
+        void onArtistItemClick(@NonNull Artist artist, @NonNull ArtistHolder holder);
     }
 
     private final WeakReference<Fragment> mFragmentReference;
@@ -146,7 +147,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
 
         @Override
         public void onClick(View v) {
-            mListener.onArtistItemClick(getArtist(getAdapterPosition()));
+            mListener.onArtistItemClick(getArtist(getAdapterPosition()), this);
         }
 
         @Override

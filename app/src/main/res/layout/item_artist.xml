@@ -10,7 +10,7 @@
     tools:layout_margin="@dimen/item_spacing_full">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@drawable/artist_cover_big"
-            app:aspectRatio="@dimen/artist_item_image_ratio"/>
+            app:aspectRatio="@dimen/artist_item_image_ratio"
+            tools:src="@drawable/placeholder_artist_cover_big"/>
 
         <RelativeLayout
             android:id="@+id/artist_item_footer"
@@ -38,7 +38,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/body_text_white"
                 android:textStyle="bold"
-                tools:text="@string/artist_name"/>
+                tools:text="@string/placeholder_artist_name"/>
 
             <TextView
                 android:id="@+id/artist_item_genres"
@@ -46,7 +46,7 @@
                 android:layout_below="@id/artist_item_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/body_text_1_inverse"
-                tools:text="@string/artist_genres"/>
+                tools:text="@string/placeholder_artist_genres"/>
 
             <ImageView
                 android:id="@+id/artist_item_albums_icon"
@@ -68,8 +68,7 @@
                 android:gravity="center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/body_text_white"
-                tools:text="@string/artist_albums"/>
-
+                tools:text="@string/placeholder_artist_albums"/>
 
             <ImageView
                 android:id="@+id/artist_item_tracks_icon"
@@ -92,7 +91,7 @@
                 android:gravity="center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/body_text_white"
-                tools:text="@string/artist_tracks"/>
+                tools:text="@string/placeholder_artist_tracks"/>
 
         </RelativeLayout>
 

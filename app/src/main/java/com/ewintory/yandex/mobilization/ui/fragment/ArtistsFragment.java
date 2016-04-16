@@ -175,7 +175,7 @@ public final class ArtistsFragment extends BaseFragment
     }
 
     @Override
-    public void onArtistItemClick(@NonNull Artist artist) {
+    public void onArtistItemClick(@NonNull Artist artist, @NonNull ArtistsAdapter.ArtistHolder holder) {
         mListener.onArtistSelected(artist);
     }
 }
