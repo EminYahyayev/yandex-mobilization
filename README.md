@@ -25,8 +25,8 @@
 
 ## Примерный вид экранов
 
-![screen](../master/art/provided/artists-list.png =250x)
-![screen](../master/art/provided/artists-detail.png =250x)
+<img src="../master/art/provided/artists-list.png" width="250">
+<img src="../master/art/provided/artists-list.png" width="250">
 
 ## Библиотеки
 
