@@ -94,7 +94,6 @@
                 android:textColor="@color/body_text_white"
                 tools:text="@string/artist_tracks"/>
 
-
         </RelativeLayout>
 
     </LinearLayout>

@@ -49,6 +49,7 @@ public final class ArtistsFragment extends BaseFragment
     @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
     @Bind(R.id.progress_bar) ContentLoadingProgressBar mProgressBar;
     @Bind(R.id.error_view) TextView mErrorView;
+    @Bind(R.id.empty_view) TextView mEmptyView;
 
     @Inject YandexApi mYandexApi;
 
@@ -127,8 +128,8 @@ public final class ArtistsFragment extends BaseFragment
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mArtistsAdapter.setListener(DUMMY);
+        super.onDestroyView();
     }
 
     @Override
@@ -140,7 +141,7 @@ public final class ArtistsFragment extends BaseFragment
     @Override
     public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
         if (!response.isSuccessful()) {
-            Timber.e("Artists call wasn't successful");
+            Timber.e("Artists call wasn't successful.");
             mArtists = null;
         } else {
             mArtists = response.body();
@@ -159,13 +160,12 @@ public final class ArtistsFragment extends BaseFragment
         if (mProgressBar != null)
             mProgressBar.hide();
 
-        if (mArtists != null) {
-            if (mErrorView != null)
-                mErrorView.setVisibility(View.GONE);
-        } else {
-            if (mErrorView != null)
-                mErrorView.setVisibility(View.VISIBLE);
-        }
+        if (mErrorView != null)
+            mErrorView.setVisibility(mArtists == null ? View.VISIBLE : View.GONE);
+
+        if (mEmptyView != null)
+            mEmptyView.setVisibility(
+                    (mArtists != null && mArtists.isEmpty()) ? View.VISIBLE : View.GONE);
 
         if (mArtistsAdapter != null)
             mArtistsAdapter.setArtists(mArtists);

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.ewintory.yandex.mobilization.BuildConfig;
 import com.ewintory.yandex.mobilization.model.Artist;
 import com.ewintory.yandex.mobilization.network.YandexApi;
 import com.ewintory.yandex.mobilization.network.deserializer.ArtistDeserializer;
@@ -20,13 +21,13 @@ import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public final class NetworkModule {
 
-    private static final String API_BASE_URL = "http://download.cdn.yandex.net/mobilization-2016/";
     private static final int DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
     private static final int CONNECTION_TIMEOUT_SECONDS = 10;
 
@@ -38,12 +39,6 @@ public final class NetworkModule {
     }
 
     @Provides
-    @Singleton Cache provideOkHttpCache(Application application) {
-        File cacheDir = new File(application.getCacheDir(), "http");
-        return new Cache(cacheDir, DISK_CACHE_SIZE);
-    }
-
-    @Provides
     @Singleton Gson provideGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Artist.class, new ArtistDeserializer());
@@ -51,9 +46,15 @@ public final class NetworkModule {
     }
 
     @Provides
+    @Singleton Cache provideOkHttpCache(Application application) {
+        File cacheDir = new File(application.getCacheDir(), "http");
+        return new Cache(cacheDir, DISK_CACHE_SIZE);
+    }
+
+    @Provides
     @Singleton OkHttpClient provideOkHttpClient(Cache cache) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        logging.setLevel(BuildConfig.DEBUG ? Level.BASIC : Level.NONE);
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         clientBuilder.connectTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -64,11 +65,11 @@ public final class NetworkModule {
     }
 
     @Provides
-    @Singleton Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
+    @Singleton Retrofit provideRetrofit(Gson gson, OkHttpClient client) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(API_BASE_URL)
-                .client(okHttpClient)
+                .baseUrl(YandexApi.API_BASE_URL)
+                .client(client)
                 .build();
     }
 

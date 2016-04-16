@@ -22,8 +22,8 @@ abstract class BaseFragment extends Fragment {
     private Toast mToast;
 
     @CallSuper
-    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    @Override public void onViewCreated(View view, Bundle savedState) {
+        super.onViewCreated(view, savedState);
         ButterKnife.bind(this, view);
     }
 

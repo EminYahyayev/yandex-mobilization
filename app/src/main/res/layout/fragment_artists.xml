@@ -22,12 +22,21 @@
         android:layout_gravity="center"/>
 
     <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/artists_empty"
+        android:visibility="gone"
+        tools:visibility="gone"/>
+
+    <TextView
         android:id="@+id/error_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/artists_error"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="gone"/>
 
 </FrameLayout>

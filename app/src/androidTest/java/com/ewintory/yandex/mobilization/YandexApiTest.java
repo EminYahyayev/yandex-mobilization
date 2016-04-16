@@ -4,11 +4,12 @@ import android.app.Application;
 import android.test.ApplicationTestCase;
 
 import com.ewintory.yandex.mobilization.model.Artist;
-import com.ewintory.yandex.mobilization.network.ApiFactory;
 import com.ewintory.yandex.mobilization.network.YandexApi;
 import com.ewintory.yandex.mobilization.utils.CollectionUtils;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Response;
 
@@ -20,10 +21,16 @@ public class YandexApiTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
-    public void testArtists() throws Exception {
-        YandexApi api = ApiFactory.createApi(getContext(), YandexApi.class);
+    @Inject YandexApi mApi;
 
-        Response<List<Artist>> response = api.artists().execute();
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+//        YandexApplication.get(getContext()).getNetworkComponent().inject(this);
+    }
+
+    public void testArtists() throws Exception {
+        Response<List<Artist>> response = mApi.artists().execute();
 
         if (!response.isSuccessful()) {
             fail("Response isn't successful. Code: " + response.code());
