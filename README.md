@@ -26,7 +26,7 @@
 ## Примерный вид экранов
 
 <img src="../master/art/provided/artists-list.png" width="250">
-<img src="../master/art/provided/artists-list.png" width="250">
+<img src="../master/art/provided/artists-detail.png" width="250">
 
 ## Библиотеки
 
