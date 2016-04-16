@@ -25,9 +25,8 @@
 
 ## Примерный вид экранов
 
-![screen](../master/art/provided/artists-list.png)
-
-![screen](../master/art/provided/artists-detail.png)
+![screen](../master/art/provided/artists-list.png =250x)
+![screen](../master/art/provided/artists-detail.png =250x)
 
 ## Библиотеки
 
@@ -42,8 +41,8 @@
 
 ## Школа мобильной разработки Яндекса
 
-[Описание](https://academy.yandex.ru/events/mobdev/msk-2016/)
-[Регистрация](https://academy.yandex.ru/events/mobdev/msk-2016/register/)
+* [Описание](https://academy.yandex.ru/events/mobdev/msk-2016/)
+* [Регистрация](https://academy.yandex.ru/events/mobdev/msk-2016/register/)
 
 ## License
 
