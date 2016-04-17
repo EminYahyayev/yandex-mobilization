@@ -10,17 +10,17 @@
         desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     </string>
 
-    <string name="artist_name" translatable="false">Lana Del Rey</string>
-    <string name="artist_description" translatable="false">американская певица, автор-исполнитель,
+    <string name="placeholder_artist_name" translatable="false">Lana Del Rey</string>
+    <string name="placeholder_artist_description" translatable="false">американская певица, автор-исполнитель,
         композитор и модель. Начала свою карьеру в Нью-Йорке в 2005 году, но известность пришла к
         ней только в 2011 году, когда был выпущен видеоклип на сингл «Video Games», который уже
         через месяц стал интернет-сенсацией.
     </string>
-    <string name="artist_link" translatable="false">http://www.lanadelrey.com/</string>
-    <string name="artist_tracks" translatable="false">90</string>
-    <string name="artist_tracks_detail" translatable="false">90 tracks</string>
-    <string name="artist_albums" translatable="false">23</string>
-    <string name="artist_albums_detail" translatable="false">23 albums</string>
-    <string name="artist_genres" translatable="false">pop, dance</string>
+    <string name="placeholder_artist_link" translatable="false">http://www.lanadelrey.com/</string>
+    <string name="placeholder_artist_tracks" translatable="false">90</string>
+    <string name="placeholder_artist_tracks_detail" translatable="false">90 tracks</string>
+    <string name="placeholder_artist_albums" translatable="false">23</string>
+    <string name="placeholder_artist_albums_detail" translatable="false">23 albums</string>
+    <string name="placeholder_artist_genres" translatable="false">pop, dance</string>
 
 </resources>

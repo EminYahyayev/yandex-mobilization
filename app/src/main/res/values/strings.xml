@@ -11,6 +11,7 @@
 
     <!-- Artists -->
     <string name="artists_error">Error occurred.</string>
+    <string name="artists_empty">No artists found.</string>
 
     <!-- Artist detail -->
     <string name="artist_detail_albums">%1$s albums</string>

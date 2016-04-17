@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
 import com.ewintory.yandex.mobilization.BuildConfig;
 import com.ewintory.yandex.mobilization.R;
 import com.ewintory.yandex.mobilization.model.Artist;
@@ -90,7 +89,6 @@ public final class ArtistDetailActivity extends BaseActivity {
         Glide.with(this)
                 .load(artist.getBigCover())
                 .error(R.color.artist_image_error)
-                .priority(Priority.HIGH)
                 .thumbnail(thumbnailRequest)
                 .into(mArtistCover);
     }

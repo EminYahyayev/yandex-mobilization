@@ -1,6 +1,5 @@
 package com.ewintory.yandex.mobilization.ui.activity;
 
-import android.app.ProgressDialog;
 import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -19,7 +18,6 @@ import butterknife.ButterKnife;
 abstract class BaseActivity extends AppCompatActivity {
 
     private Toast mToast;
-    private ProgressDialog mProgressDialog;
 
     @CallSuper
     @Override protected void onDestroy() {
@@ -44,21 +42,5 @@ abstract class BaseActivity extends AppCompatActivity {
         }
         mToast = Toast.makeText(this, message, duration);
         mToast.show();
-    }
-
-    @SuppressWarnings("unused")
-    protected final void showProgressDialog() {
-        if (mProgressDialog != null)
-            mProgressDialog.dismiss();
-
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.show();
-    }
-
-    @SuppressWarnings("unused")
-    protected final void hideProgressDialog() {
-        if (mProgressDialog != null)
-            mProgressDialog.dismiss();
     }
 }
