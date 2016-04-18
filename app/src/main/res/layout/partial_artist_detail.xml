@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/content_padding_normal">
+    android:paddingBottom="@dimen/content_padding_normal"
+    android:paddingTop="@dimen/element_spacing_normal">
 
     <FrameLayout
         android:id="@+id/artist_detail_link_container"
-        style="@style/ArtistDetailContainer">
+        style="@style/ArtistDetailContainer.Clickable">
 
         <ImageView
             android:id="@+id/artist_detail_link_icon"
@@ -26,7 +27,7 @@
 
     <FrameLayout
         android:id="@+id/artist_detail_albums_container"
-        style="@style/ArtistDetailContainer">
+        style="@style/ArtistDetailContainer.Clickable">
 
         <ImageView
             android:id="@+id/artist_detail_albums_icon"
@@ -43,7 +44,7 @@
 
     <FrameLayout
         android:id="@+id/artist_detail_tracks_container"
-        style="@style/ArtistDetailContainer">
+        style="@style/ArtistDetailContainer.Clickable">
 
         <ImageView
             android:id="@+id/artist_detail_tracks_icon"
@@ -59,23 +60,42 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/artist_detail_description_label"
+        android:id="@+id/artist_detail_genres_label"
+        style="@style/ArtistDetailLabel"
+        android:text="@string/artist_detail_genres"
+        android:visibility="gone"/>
+
+    <HorizontalScrollView
+        android:id="@+id/artist_detail_genres_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/element_spacing_normal"
         android:layout_marginEnd="@dimen/keyline_1"
-        android:layout_marginStart="@dimen/keyline_1"
-        android:layout_marginTop="@dimen/element_spacing_normal"
-        android:text="@string/artist_detail_biography"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="?attr/colorPrimary"/>
+        android:layout_marginTop="@dimen/element_spacing_small"
+        android:layout_marginBottom="@dimen/element_spacing_small"
+        android:layout_marginStart="@dimen/keyline_2_minus_16dp"
+        android:fadingEdgeLength="@dimen/keyline_1"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/artist_detail_genres"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:orientation="horizontal"/>
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/artist_detail_description_label"
+        style="@style/ArtistDetailLabel"
+        android:text="@string/artist_detail_biography"/>
 
     <TextView
         android:id="@+id/artist_detail_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/keyline_1"
-        android:layout_marginStart="@dimen/keyline_1"
+        android:layout_marginStart="@dimen/keyline_2_minus_16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="@string/placeholder_artist_description"/>
 

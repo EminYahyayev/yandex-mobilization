@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +17,9 @@ import com.bumptech.glide.Glide;
 import com.ewintory.yandex.mobilization.BuildConfig;
 import com.ewintory.yandex.mobilization.R;
 import com.ewintory.yandex.mobilization.model.Artist;
+import com.ewintory.yandex.mobilization.utils.CollectionUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -42,6 +46,9 @@ public final class ArtistDetailActivity extends BaseActivity {
     @Bind(R.id.artist_detail_tracks) TextView mArtistTracks;
     @Bind(R.id.artist_detail_tracks_icon) ImageView mArtistTracksIcon;
     @Bind(R.id.artist_detail_tracks_container) ViewGroup mArtistTracksContainer;
+
+    @Bind(R.id.artist_detail_genres) ViewGroup mGenres;
+    @Bind(R.id.artist_detail_genres_container) ViewGroup mGenresContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedState) {
@@ -79,6 +86,8 @@ public final class ArtistDetailActivity extends BaseActivity {
         mArtistTracks.setText(getResources()
                 .getQuantityString(R.plurals.artist_detail_tracks, tracks, tracks));
 
+        displayGenres(artist.getGenres());
+
         // prepare thumbnail request using a small cover image
         DrawableRequestBuilder<String> thumbnailRequest = Glide
                 .with(this)
@@ -91,5 +100,29 @@ public final class ArtistDetailActivity extends BaseActivity {
                 .error(R.color.artist_image_error)
                 .thumbnail(thumbnailRequest)
                 .into(mArtistCover);
+    }
+
+    private void displayGenres(List<String> genres) {
+        if (CollectionUtils.isEmpty(genres)) {
+            mGenresContainer.setVisibility(View.GONE);
+        } else {
+            mGenresContainer.setVisibility(View.VISIBLE);
+            mGenres.removeAllViews();
+            LayoutInflater inflater = LayoutInflater.from(this);
+
+            for (final String genre : genres) {
+                TextView chipView = (TextView) inflater.inflate(
+                        R.layout.partial_genre_chip, mGenres, false);
+                chipView.setText(genre);
+                chipView.setContentDescription(genre);
+                chipView.setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View view) {
+                        showToast(genre + " clicked");
+                    }
+                });
+
+                mGenres.addView(chipView);
+            }
+        }
     }
 }

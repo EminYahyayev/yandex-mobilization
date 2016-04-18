@@ -14,11 +14,10 @@
     <string name="artists_empty">No artists found.</string>
 
     <!-- Artist detail -->
-    <string name="artist_detail_albums">%1$s albums</string>
-    <string name="artist_detail_songs">%1$s songs</string>
+    <string name="artist_detail_biography">Biography</string>
+    <string name="artist_detail_genres">Genres</string>
 
     <!-- About -->
     <string name="about_message">Yandex.Mobilisation 2016</string>
-    <string name="artist_detail_biography">Biography</string>
 
 </resources>
