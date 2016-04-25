@@ -24,8 +24,8 @@ import com.github.florent37.glidepalette.GlidePalette;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.BindColor;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder> {
@@ -120,15 +120,15 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
     public final class ArtistHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, BitmapPalette.CallBack {
 
-        @Bind(R.id.artist_item_cover) ImageView coverView;
-        @Bind(R.id.artist_item_name) TextView nameView;
-        @Bind(R.id.artist_item_genres) TextView genresView;
-        @Bind(R.id.artist_item_tracks) TextView tracksView;
-        @Bind(R.id.artist_item_albums) TextView albumsView;
+        @BindView(R.id.artist_item_cover) ImageView coverView;
+        @BindView(R.id.artist_item_name) TextView nameView;
+        @BindView(R.id.artist_item_genres) TextView genresView;
+        @BindView(R.id.artist_item_tracks) TextView tracksView;
+        @BindView(R.id.artist_item_albums) TextView albumsView;
 
-        @Bind(R.id.artist_item_footer) ViewGroup footerView;
-        @Bind(R.id.artist_item_tracks_icon) ImageView tracksIconView;
-        @Bind(R.id.artist_item_albums_icon) ImageView albumsIconView;
+        @BindView(R.id.artist_item_footer) ViewGroup footerView;
+        @BindView(R.id.artist_item_tracks_icon) ImageView tracksIconView;
+        @BindView(R.id.artist_item_albums_icon) ImageView albumsIconView;
 
         @BindColor(R.color.artist_footer_background) int mColorBackground;
         @BindColor(R.color.body_text_white) int mColorTitle;
