@@ -10,6 +10,7 @@ import com.ewintory.yandex.mobilization.YandexApplication;
 import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Base class for all fragments. Binds views and watches memory leaks
@@ -20,16 +21,17 @@ import butterknife.ButterKnife;
 abstract class BaseFragment extends Fragment {
 
     private Toast mToast;
+    private Unbinder mUnBinder;
 
     @CallSuper
     @Override public void onViewCreated(View view, Bundle savedState) {
         super.onViewCreated(view, savedState);
-        ButterKnife.bind(this, view);
+        mUnBinder = ButterKnife.bind(this, view);
     }
 
     @CallSuper
     @Override public void onDestroyView() {
-        ButterKnife.unbind(this);
+        mUnBinder.unbind();
         super.onDestroyView();
     }
 

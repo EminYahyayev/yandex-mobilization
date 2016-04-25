@@ -8,6 +8,7 @@ import com.ewintory.yandex.mobilization.YandexApplication;
 import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Base class for all activities. Binds views and watches memory leaks
@@ -18,17 +19,19 @@ import butterknife.ButterKnife;
 abstract class BaseActivity extends AppCompatActivity {
 
     private Toast mToast;
+    private Unbinder mUnBinder;
 
     @CallSuper
     @Override protected void onDestroy() {
         super.onDestroy();
+        mUnBinder.unbind();
         YandexApplication.get(this).getRefWatcher().watch(this);
     }
 
     @CallSuper
     @Override public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        ButterKnife.bind(this);
+        mUnBinder = ButterKnife.bind(this);
     }
 
     @SuppressWarnings("unused")

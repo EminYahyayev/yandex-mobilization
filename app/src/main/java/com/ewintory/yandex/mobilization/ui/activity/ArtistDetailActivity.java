@@ -24,37 +24,37 @@ import com.ewintory.yandex.mobilization.utils.CollectionUtils;
 
 import java.util.HashSet;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public final class ArtistDetailActivity extends BaseActivity {
 
     public static final String EXTRA_ARTIST =
             BuildConfig.APPLICATION_ID + ".extras.ARTIST";
 
-    @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbar;
-    @Bind(R.id.scroll_view) NestedScrollView mScrollView;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbar;
+    @BindView(R.id.scroll_view) NestedScrollView mScrollView;
 
-    @Bind(R.id.artist_detail_content) ViewGroup mArtistDetailContent;
+    @BindView(R.id.artist_detail_content) ViewGroup mArtistDetailContent;
 
-    @Bind(R.id.artist_detail_cover) ImageView mArtistCover;
-    @Bind(R.id.artist_detail_description_label) TextView mArtistDescriptionLabel;
-    @Bind(R.id.artist_detail_description) TextView mArtistDescription;
+    @BindView(R.id.artist_detail_cover) ImageView mArtistCover;
+    @BindView(R.id.artist_detail_description_label) TextView mArtistDescriptionLabel;
+    @BindView(R.id.artist_detail_description) TextView mArtistDescription;
 
-    @Bind(R.id.artist_detail_link) TextView mArtistLink;
-    @Bind(R.id.artist_detail_link_icon) ImageView mArtistLinkIcon;
-    @Bind(R.id.artist_detail_link_container) ViewGroup mArtistLinkContainer;
+    @BindView(R.id.artist_detail_link) TextView mArtistLink;
+    @BindView(R.id.artist_detail_link_icon) ImageView mArtistLinkIcon;
+    @BindView(R.id.artist_detail_link_container) ViewGroup mArtistLinkContainer;
 
-    @Bind(R.id.artist_detail_albums) TextView mArtistAlbums;
-    @Bind(R.id.artist_detail_albums_icon) ImageView mArtistAlbumsIcon;
-    @Bind(R.id.artist_detail_albums_container) ViewGroup mArtistAlbumsContainer;
+    @BindView(R.id.artist_detail_albums) TextView mArtistAlbums;
+    @BindView(R.id.artist_detail_albums_icon) ImageView mArtistAlbumsIcon;
+    @BindView(R.id.artist_detail_albums_container) ViewGroup mArtistAlbumsContainer;
 
-    @Bind(R.id.artist_detail_tracks) TextView mArtistTracks;
-    @Bind(R.id.artist_detail_tracks_icon) ImageView mArtistTracksIcon;
-    @Bind(R.id.artist_detail_tracks_container) ViewGroup mArtistTracksContainer;
+    @BindView(R.id.artist_detail_tracks) TextView mArtistTracks;
+    @BindView(R.id.artist_detail_tracks_icon) ImageView mArtistTracksIcon;
+    @BindView(R.id.artist_detail_tracks_container) ViewGroup mArtistTracksContainer;
 
-    @Bind(R.id.artist_detail_genres) ViewGroup mGenres;
-    @Bind(R.id.artist_detail_genres_container) ViewGroup mGenresContainer;
+    @BindView(R.id.artist_detail_genres) ViewGroup mGenres;
+    @BindView(R.id.artist_detail_genres_container) ViewGroup mGenresContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedState) {

@@ -25,7 +25,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,10 +49,10 @@ public final class ArtistsFragment extends BaseFragment
 
     private static final String STATE_ARTISTS = "state_artists";
 
-    @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
-    @Bind(R.id.progress_bar) ContentLoadingProgressBar mProgressBar;
-    @Bind(R.id.error_view) TextView mErrorView;
-    @Bind(R.id.empty_view) TextView mEmptyView;
+    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.progress_bar) ContentLoadingProgressBar mProgressBar;
+    @BindView(R.id.error_view) TextView mErrorView;
+    @BindView(R.id.empty_view) TextView mEmptyView;
 
     @Inject YandexApi mYandexApi;
 

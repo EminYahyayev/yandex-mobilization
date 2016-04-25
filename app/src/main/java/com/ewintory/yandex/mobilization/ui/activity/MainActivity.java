@@ -18,7 +18,7 @@ import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Subscription;
 import rx.subjects.BehaviorSubject;
 import rx.subscriptions.Subscriptions;
@@ -29,7 +29,7 @@ public final class MainActivity extends BaseActivity
 
     private static final int SEARCH_VIEW_THRESHOLD_MILLIS = 500;
 
-    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
 
     private Subscription mSearchViewSubscription = Subscriptions.empty();
     private BehaviorSubject<String> mSearchViewSubject;
