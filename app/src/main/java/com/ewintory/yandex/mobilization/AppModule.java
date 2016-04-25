@@ -1,4 +1,4 @@
-package com.ewintory.yandex.mobilization.di;
+package com.ewintory.yandex.mobilization;
 
 import android.app.Application;
 

@@ -31,10 +31,7 @@ import butterknife.ButterKnife;
 public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder> {
 
     public interface OnArtistClickListener {
-        OnArtistClickListener DUMMY = new OnArtistClickListener() {
-            @Override
-            public void onArtistItemClick(@NonNull Artist artist, @NonNull ArtistHolder holder) {/** dummy */}
-        };
+        OnArtistClickListener DUMMY = (artist, holder) -> {/** dummy */};
 
         void onArtistItemClick(@NonNull Artist artist, @NonNull ArtistHolder holder);
     }
@@ -92,7 +89,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
         final Artist artist = getArtist(position);
 
         holder.nameView.setText(artist.getName());
-        holder.genresView.setText(StringUtils.join(artist.getGenres(), ", ", mStringBuilder));
+        holder.genresView.setText(StringUtils.join(artist.getGenres().iterator(), ", ", mStringBuilder));
         holder.tracksView.setText(String.valueOf(artist.getTracks()));
         holder.albumsView.setText(String.valueOf(artist.getAlbums()));
 
@@ -153,7 +150,7 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
         @Override
         public void onPaletteLoaded(@Nullable Palette palette) {
             if (palette != null) {
-                Palette.Swatch swatch = palette.getVibrantSwatch();
+                Palette.Swatch swatch = palette.getLightVibrantSwatch();
                 if (swatch != null) {
                     applySwatch(swatch);
                 }

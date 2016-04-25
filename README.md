@@ -25,8 +25,8 @@
 
 ### Реализованные Требования
 
-- [ ] комментарии в коде;
-- [ ] обработку ошибок;
+- [x] комментарии в коде;
+- [x] обработку ошибок;
 - [ ] анимацию;
 - [x] кеширование (приложение сохраняет предыдущий ответ сервера);
 - [ ] тесты.
@@ -46,6 +46,9 @@
 * [Gson](https://github.com/google/gson)
 * [Glide](https://github.com/bumptech/glide)
 * [GlidePalette](https://github.com/florent37/GlidePalette)
+* [RxJava](https://github.com/ReactiveX/RxJava)
+* [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+* [Gradle Retrolambda](https://github.com/evant/gradle-retrolambda)
 
 ## Школа мобильной разработки Яндекса
 

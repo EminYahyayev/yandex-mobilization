@@ -6,8 +6,8 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +26,25 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
 import timber.log.Timber;
+
+import static android.support.v7.widget.StaggeredGridLayoutManager.VERTICAL;
 
 /**
  * A fragment displaying the list of artists
  */
 public final class ArtistsFragment extends BaseFragment
-        implements Callback<List<Artist>>, ArtistsAdapter.OnArtistClickListener {
+        implements ArtistsAdapter.OnArtistClickListener {
 
     public interface Listener {
         void onArtistSelected(@NonNull Artist artist);
 
-        Listener DUMMY = new Listener() {
-            @Override public void onArtistSelected(@NonNull Artist artist) {/** dummy */}
-        };
+        Listener DUMMY = artist -> {/** dummy */};
     }
 
     private static final String STATE_ARTISTS = "state_artists";
@@ -54,12 +56,14 @@ public final class ArtistsFragment extends BaseFragment
 
     @Inject YandexApi mYandexApi;
 
+    private Subscription mArtistsSubscription = Subscriptions.empty();
+
     private Listener mListener = Listener.DUMMY;
     private ArtistsAdapter mArtistsAdapter;
     private List<Artist> mArtists;
-    private Call<List<Artist>> mArtistsCall;
 
-    @Override public void onAttach(Context context) {
+    @Override
+    public void onAttach(Context context) {
         super.onAttach(context);
         if (!(getActivity() instanceof Listener))
             throw new ClassCastException("Activity must implement Listener interface");
@@ -70,7 +74,11 @@ public final class ArtistsFragment extends BaseFragment
     @Override
     public void onCreate(@Nullable Bundle savedState) {
         super.onCreate(savedState);
+        setHasOptionsMenu(true);
         YandexApplication.get(getContext()).getNetworkComponent().inject(this);
+
+        mArtistsAdapter = new ArtistsAdapter(this);
+        mArtistsAdapter.setListener(this);
     }
 
     @Override
@@ -82,19 +90,10 @@ public final class ArtistsFragment extends BaseFragment
     public void onViewCreated(View view, Bundle savedState) {
         super.onViewCreated(view, savedState);
 
-        mArtistsAdapter = new ArtistsAdapter(this);
-        mArtistsAdapter.setListener(this);
-
         final int spanCount = getResources().getInteger(R.integer.artists_columns);
-//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(spanCount, VERTICAL);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override public int getSpanSize(int position) {
-                // return position % 9 == 4 ? spanCount : 1;
-                return 1;
-            }
-        });
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(spanCount, VERTICAL);
 
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new ArtistItemAnimator(spanCount));
         mRecyclerView.setAdapter(mArtistsAdapter);
@@ -110,16 +109,14 @@ public final class ArtistsFragment extends BaseFragment
     public void onStart() {
         super.onStart();
         if (mArtists == null) {
-            mArtistsCall = mYandexApi.artists();
-            mArtistsCall.enqueue(this);
+            reloadArtists();
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mArtistsCall != null)
-            mArtistsCall.cancel();
+        mArtistsSubscription.unsubscribe();
     }
 
     @Override
@@ -141,22 +138,25 @@ public final class ArtistsFragment extends BaseFragment
         super.onDetach();
     }
 
-    @Override
-    public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
-        if (!response.isSuccessful()) {
-            Timber.e("Artists call wasn't successful.");
-            mArtists = null;
-        } else {
-            mArtists = response.body();
-        }
-        updateContent();
-    }
+    private void reloadArtists() {
+        mArtistsSubscription.unsubscribe();
+        mArtistsSubscription = mYandexApi.artists()
+                .doOnNext(list -> Timber.v("Artists loaded, size: %d", list.size()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(artists -> {
+                    mArtists = artists;
+                    updateContent();
+                }, throwable -> {
+                    if (throwable instanceof HttpException) {
+                        HttpException response = (HttpException) throwable;
+                        int code = response.code();
+                        Timber.e("Artists failed to load with code=%d", code);
+                    }
 
-    @Override
-    public void onFailure(Call<List<Artist>> call, Throwable t) {
-        Timber.e(t.getMessage());
-        mArtists = null;
-        updateContent();
+                    mArtists = null;
+                    updateContent();
+                });
     }
 
     private void updateContent() {

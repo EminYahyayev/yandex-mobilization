@@ -3,21 +3,16 @@ package com.ewintory.yandex.mobilization.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.List;
+import java.util.HashSet;
 
 /**
  * A model class for an artist
  */
 public final class Artist implements Parcelable {
 
-    public static final Parcelable.Creator<Artist> CREATOR = new Parcelable.Creator<Artist>() {
-        @Override public Artist createFromParcel(Parcel source) {return new Artist(source);}
-
-        @Override public Artist[] newArray(int size) {return new Artist[size];}
-    };
     private long id;
     private String name;
-    private List<String> genres;
+    private HashSet<String> genres = new HashSet<>();
     private int tracks;
     private int albums;
     private String link;
@@ -26,18 +21,6 @@ public final class Artist implements Parcelable {
     private String bigCover;
 
     public Artist() {}
-
-    protected Artist(Parcel in) {
-        this.id = in.readLong();
-        this.name = in.readString();
-        this.genres = in.createStringArrayList();
-        this.tracks = in.readInt();
-        this.albums = in.readInt();
-        this.link = in.readString();
-        this.description = in.readString();
-        this.smallCover = in.readString();
-        this.bigCover = in.readString();
-    }
 
     public long getId() {
         return id;
@@ -54,15 +37,6 @@ public final class Artist implements Parcelable {
 
     public Artist setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public List<String> getGenres() {
-        return genres;
-    }
-
-    public Artist setGenres(List<String> genres) {
-        this.genres = genres;
         return this;
     }
 
@@ -120,6 +94,15 @@ public final class Artist implements Parcelable {
         return this;
     }
 
+    public HashSet<String> getGenres() {
+        return genres;
+    }
+
+    public Artist setGenres(HashSet<String> genres) {
+        this.genres = genres;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Artist{" +
@@ -142,7 +125,7 @@ public final class Artist implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
         dest.writeString(this.name);
-        dest.writeStringList(this.genres);
+        dest.writeSerializable(this.genres);
         dest.writeInt(this.tracks);
         dest.writeInt(this.albums);
         dest.writeString(this.link);
@@ -150,4 +133,22 @@ public final class Artist implements Parcelable {
         dest.writeString(this.smallCover);
         dest.writeString(this.bigCover);
     }
+
+    protected Artist(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.genres = (HashSet<String>) in.readSerializable();
+        this.tracks = in.readInt();
+        this.albums = in.readInt();
+        this.link = in.readString();
+        this.description = in.readString();
+        this.smallCover = in.readString();
+        this.bigCover = in.readString();
+    }
+
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override public Artist createFromParcel(Parcel source) {return new Artist(source);}
+
+        @Override public Artist[] newArray(int size) {return new Artist[size];}
+    };
 }

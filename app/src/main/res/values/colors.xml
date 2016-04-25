@@ -9,9 +9,11 @@
     <color name="body_text_1_inverse">#deffffff</color>
     <color name="body_text_2_inverse">#8affffff</color>
 
+    <color name="divider">#1f000000</color>
+
     <color name="primary">@color/material_red600</color>
     <color name="primary_dark">@color/material_red800</color>
-    <color name="primary_light">@color/material_red100</color>
+    <color name="primary_light">@color/material_red500</color>
     <color name="accent">@color/material_amberA700</color>
     <!--<color name="primary">@color/material_purple400</color>-->
     <!--<color name="primary_dark">@color/material_purple500</color>-->
@@ -26,5 +28,9 @@
         <item>@color/accent</item>
         <item>@color/primary</item>
     </array>
+
+    <!-- search -->
+    <color name="dialog_background">#7f000000</color>
+    <color name="card">#fff</color>
 
 </resources>

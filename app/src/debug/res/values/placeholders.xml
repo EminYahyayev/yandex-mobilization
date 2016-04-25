@@ -22,5 +22,6 @@
     <string name="placeholder_artist_albums" translatable="false">23</string>
     <string name="placeholder_artist_albums_detail" translatable="false">23 albums</string>
     <string name="placeholder_artist_genres" translatable="false">pop, dance</string>
+    <string name="placeholder_artist_genre" translatable="false">dance</string>
 
 </resources>

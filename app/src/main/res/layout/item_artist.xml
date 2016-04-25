@@ -18,6 +18,7 @@
             android:id="@+id/artist_item_cover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
             app:aspectRatio="@dimen/artist_item_image_ratio"

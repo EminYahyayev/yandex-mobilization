@@ -8,12 +8,17 @@
     <string name="action_about">О программе</string>
 
     <!-- Artists -->
-    <string name="artists_error">Ошибка в закрузке исполнителей.</string>
+    <string name="artists_empty_unknown_error">Ошибка в закрузке исполнителей. Потяните сверху для повтора загрузки.</string>
 
     <!-- About -->
     <string name="about_message">Яндекс.Мобилизация 2016</string>
     <string name="title_about">О программе</string>
     <string name="artist_detail_biography">Биография</string>
     <string name="title_artist_detail">Исполнитель</string>
+    <string name="artists_empty">Исполнители не найдены.</string>
+    <string name="artist_detail_genres">Жанры</string>
+    <string name="search_hint">Искать артистов</string>
+    <string name="artists_empty_no_network">Данные не доступны. Пожалуйста проверьте ваше интернет соединение.</string>
+    <string name="button_retry">Повторить</string>
 
 </resources>
