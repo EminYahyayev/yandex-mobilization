@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:fadeScrollbars="true"
         android:padding="@dimen/item_spacing_half"
+        android:scrollbars="vertical"
         tools:listitem="@layout/item_artist"/>
 
     <android.support.v4.widget.ContentLoadingProgressBar
@@ -35,8 +37,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/artists_error"
+        android:layout_margin="@dimen/content_padding_normal"
+        android:gravity="center"
+        android:text="@string/artists_empty_no_network"
         android:visibility="gone"
-        tools:visibility="gone"/>
+        tools:visibility="visible"/>
 
 </FrameLayout>

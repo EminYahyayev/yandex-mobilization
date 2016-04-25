@@ -1,9 +1,12 @@
 package com.ewintory.yandex.mobilization.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -19,7 +22,7 @@ import com.ewintory.yandex.mobilization.R;
 import com.ewintory.yandex.mobilization.model.Artist;
 import com.ewintory.yandex.mobilization.utils.CollectionUtils;
 
-import java.util.List;
+import java.util.HashSet;
 
 import butterknife.Bind;
 
@@ -30,6 +33,9 @@ public final class ArtistDetailActivity extends BaseActivity {
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbar;
+    @Bind(R.id.scroll_view) NestedScrollView mScrollView;
+
+    @Bind(R.id.artist_detail_content) ViewGroup mArtistDetailContent;
 
     @Bind(R.id.artist_detail_cover) ImageView mArtistCover;
     @Bind(R.id.artist_detail_description_label) TextView mArtistDescriptionLabel;
@@ -55,6 +61,9 @@ public final class ArtistDetailActivity extends BaseActivity {
         super.onCreate(savedState);
         setContentView(R.layout.activity_artist_detail);
 
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
         setSupportActionBar(mToolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,6 +86,11 @@ public final class ArtistDetailActivity extends BaseActivity {
         final String link = artist.getLink();
         mArtistLink.setText(link);
         mArtistLinkContainer.setVisibility(TextUtils.isEmpty(link) ? View.GONE : View.VISIBLE);
+        mArtistLinkContainer.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(link));
+            startActivity(intent);
+        });
 
         final int albums = artist.getAlbums();
         mArtistAlbums.setText(getResources()
@@ -95,14 +109,16 @@ public final class ArtistDetailActivity extends BaseActivity {
 
         // Loads and displays the small cover retrieved by the given thumbnail request
         // if it finishes before the big cover request.
+        final String coverUrl = artist.getBigCover();
+        //noinspection unchecked
         Glide.with(this)
-                .load(artist.getBigCover())
+                .load(coverUrl)
                 .error(R.color.artist_image_error)
                 .thumbnail(thumbnailRequest)
                 .into(mArtistCover);
     }
 
-    private void displayGenres(List<String> genres) {
+    private void displayGenres(HashSet<String> genres) {
         if (CollectionUtils.isEmpty(genres)) {
             mGenresContainer.setVisibility(View.GONE);
         } else {
@@ -115,11 +131,7 @@ public final class ArtistDetailActivity extends BaseActivity {
                         R.layout.partial_genre_chip, mGenres, false);
                 chipView.setText(genre);
                 chipView.setContentDescription(genre);
-                chipView.setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View view) {
-                        showToast(genre + " clicked");
-                    }
-                });
+                // chipView.setOnClickListener(view -> showToast(genre + " clicked"));
 
                 mGenres.addView(chipView);
             }

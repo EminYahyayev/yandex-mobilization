@@ -10,6 +10,7 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public final class ArtistDeserializer implements JsonDeserializer<Artist> {
@@ -32,7 +33,7 @@ public final class ArtistDeserializer implements JsonDeserializer<Artist> {
         final int albums = jsonObject.get("albums").getAsInt();
 
         final JsonArray genreArray = jsonObject.get("genres").getAsJsonArray();
-        final List<String> genres = toStringList(genreArray);
+        final HashSet<String> genres = toStringHashSet(genreArray);
 
         final JsonObject coverObject = jsonObject.get("cover").getAsJsonObject();
         final String bigCover = safeGetString(coverObject.get("big"));
@@ -57,5 +58,14 @@ public final class ArtistDeserializer implements JsonDeserializer<Artist> {
         }
         return list;
     }
+
+    private static HashSet<String> toStringHashSet(JsonArray array) {
+        HashSet<String> set = new HashSet<>(array.size());
+        for (JsonElement element : array) {
+            set.add(element.getAsString());
+        }
+        return set;
+    }
+
 
 }

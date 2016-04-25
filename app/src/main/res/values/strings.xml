@@ -4,20 +4,29 @@
     <!-- Titles -->
     <string name="title_main">Artists</string>
     <string name="title_artist_detail">Artist</string>
+    <string name="title_search">Search</string>
     <string name="title_about">About</string>
 
     <!-- Actions -->
     <string name="action_about">About</string>
+    <string name="action_search">Search</string>
 
     <!-- Artists -->
-    <string name="artists_error">Error occurred.</string>
     <string name="artists_empty">No artists found.</string>
+    <string name="artists_empty_no_network">No artists available. The network is not available to fetch artists data.</string>
+    <string name="artists_empty_server_down">No artists available. The server is not returning data.</string>
+    <string name="artists_empty_unknown_error">Error occurred.</string>
 
     <!-- Artist detail -->
     <string name="artist_detail_biography">Biography</string>
     <string name="artist_detail_genres">Genres</string>
 
+    <!-- Search -->
+    <string name="search_hint">Search artists</string>
+    <string name="search_label">Yandex.Mobilisation Artists</string>
+
     <!-- About -->
     <string name="about_message">Yandex.Mobilisation 2016</string>
+    <string name="button_retry">Retry</string>
 
 </resources>

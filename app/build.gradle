@@ -7,7 +7,7 @@ android {
         config {
             keyAlias 'yandex'
             keyPassword 'yandex'
-            storeFile file('$rootDir/keystore.jks')
+            storeFile file("$rootDir/keystore.jks")
             storePassword 'yandex'
         }
     }
@@ -17,6 +17,10 @@ android {
         // Or, if you prefer, you can continue to check for errors in release builds,
         // but continue the build even when errors are found:
         abortOnError false
+    }
+
+    dexOptions {
+        maxProcessCount 2
     }
 
     compileSdkVersion 23
@@ -66,17 +70,21 @@ dependencies {
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile 'com.github.florent37:glidepalette:1.0.6'
 
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.3'
+    compile 'com.jakewharton.rxrelay:rxrelay:1.1.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
+
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
 
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.3'
-
-    apt 'com.google.dagger:dagger-compiler:2.2'
-    compile 'com.google.dagger:dagger:2.2'
+    apt 'com.google.dagger:dagger-compiler:2.4'
+    compile 'com.google.dagger:dagger:2.4'
     provided 'javax.annotation:jsr250-api:1.0'
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'

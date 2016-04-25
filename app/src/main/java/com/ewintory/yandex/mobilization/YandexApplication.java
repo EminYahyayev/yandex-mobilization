@@ -3,11 +3,9 @@ package com.ewintory.yandex.mobilization;
 import android.app.Application;
 import android.content.Context;
 
-import com.ewintory.yandex.mobilization.di.AppModule;
-import com.ewintory.yandex.mobilization.di.DaggerNetworkComponent;
-import com.ewintory.yandex.mobilization.di.NetworkComponent;
-import com.ewintory.yandex.mobilization.di.NetworkModule;
-import com.squareup.leakcanary.LeakCanary;
+import com.ewintory.yandex.mobilization.network.DaggerNetworkComponent;
+import com.ewintory.yandex.mobilization.network.NetworkComponent;
+import com.ewintory.yandex.mobilization.network.NetworkModule;
 import com.squareup.leakcanary.RefWatcher;
 
 import timber.log.Timber;
@@ -27,7 +25,8 @@ public final class YandexApplication extends Application {
         super.onCreate();
 
         mRefWatcher = BuildConfig.DEBUG
-                ? LeakCanary.install(this)
+//                ? LeakCanary.install(this)
+                ? RefWatcher.DISABLED
                 : RefWatcher.DISABLED;
 
         configureTimber();
@@ -49,7 +48,7 @@ public final class YandexApplication extends Application {
     private void configureTimber() {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree() {
-                // Add the line number to the tag
+                // Adds the line number to the tag
                 @Override protected String createStackElementTag(StackTraceElement element) {
                     return super.createStackElementTag(element) + ":" + element.getLineNumber();
                 }

@@ -1,4 +1,4 @@
-package com.ewintory.yandex.mobilization.di;
+package com.ewintory.yandex.mobilization.network;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 
 import com.ewintory.yandex.mobilization.BuildConfig;
 import com.ewintory.yandex.mobilization.model.Artist;
-import com.ewintory.yandex.mobilization.network.YandexApi;
 import com.ewintory.yandex.mobilization.network.deserializer.ArtistDeserializer;
 import com.ewintory.yandex.mobilization.utils.CacheControlInterceptor;
 import com.google.gson.Gson;
@@ -24,6 +23,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -60,7 +60,7 @@ public final class NetworkModule {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         clientBuilder.connectTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
         clientBuilder.readTimeout(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-        // Offline cache support
+        // Добавляем поддержку offline кэша
         clientBuilder.addInterceptor(new CacheControlInterceptor(application));
         clientBuilder.addNetworkInterceptor(new CacheControlInterceptor(application));
         clientBuilder.addInterceptor(logging);
@@ -72,6 +72,8 @@ public final class NetworkModule {
     @Singleton Retrofit provideRetrofit(Gson gson, OkHttpClient client) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                // Добавляем поддержку RxJava
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(YandexApi.API_BASE_URL)
                 .client(client)
                 .build();

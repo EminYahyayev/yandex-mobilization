@@ -10,4 +10,30 @@
 
     <style name="Theme.Yandex" parent="Theme.Yandex.Base"/>
 
+    <style name="Theme.Yandex.Artists"/>
+
+    <style name="Theme.Yandex.ArtistDetail"/>
+
+    <style name="Theme.Yandex.Search" parent="Theme.Yandex">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="autoCompleteTextViewStyle">@style/Widget.Yandex.Search.AutoCompleteTextView
+        </item>
+        <item name="searchViewStyle">@style/Widget.Yandex.SearchView</item>
+        <item name="colorControlNormal">@color/body_text_2</item>
+        <item name="colorControlActivated">@color/accent</item>
+    </style>
+
+    <style name="Widget.Yandex.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="searchHintIcon">@null</item>
+        <item name="queryBackground">@null</item>
+        <item name="submitBackground">@null</item>
+    </style>
+
+    <style name="Widget.Yandex.Search.AutoCompleteTextView" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:textColorHint">@color/body_text_2</item>
+        <!-- If set to @null the cursor will be displayed using android:textColor -->
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
 </resources>

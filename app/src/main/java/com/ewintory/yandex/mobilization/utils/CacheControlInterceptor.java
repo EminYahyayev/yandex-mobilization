@@ -11,7 +11,7 @@ import okhttp3.Response;
 /**
  * Offline cache support interceptor
  *
- * @see <a href="http://stackoverflow.com/a/34266019">StackOverflow answer</a>
+ * @see <a href="http://stackoverflow.com/a/34266019">SO answer</a>
  */
 public class CacheControlInterceptor implements Interceptor {
 
@@ -21,7 +21,8 @@ public class CacheControlInterceptor implements Interceptor {
         mAppContext = context.getApplicationContext();
     }
 
-    @Override public Response intercept(Chain chain) throws IOException {
+    @Override
+    public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
         String cacheHeaderValue = NetworkUtils.isNetworkAvailable(mAppContext)
                 ? "public, max-age=2419200"

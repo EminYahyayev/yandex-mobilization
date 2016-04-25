@@ -11,10 +11,12 @@ import com.ewintory.yandex.mobilization.utils.Utility;
 
 public final class ArtistItemAnimator extends DefaultItemAnimator {
 
+    private static final int ROWS_TO_ANIMATE = 10;
+
     private int lastAddAnimatedItem;
 
     public ArtistItemAnimator(int spanCount) {
-        lastAddAnimatedItem = -3 * spanCount;
+        lastAddAnimatedItem = -ROWS_TO_ANIMATE * spanCount;
     }
 
     @Override

@@ -30,7 +30,6 @@ public final class GlideConfig implements GlideModule {
     public void registerComponents(Context context, Glide glide) {
         YandexApplication.get(context).getNetworkComponent().inject(this);
 
-        glide.register(GlideUrl.class, InputStream.class,
-                new OkHttpUrlLoader.Factory(mOkHttpClient));
+        glide.register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(mOkHttpClient));
     }
 }

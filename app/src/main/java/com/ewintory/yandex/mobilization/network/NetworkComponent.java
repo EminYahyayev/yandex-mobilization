@@ -1,6 +1,6 @@
-package com.ewintory.yandex.mobilization.di;
+package com.ewintory.yandex.mobilization.network;
 
-import com.ewintory.yandex.mobilization.network.GlideConfig;
+import com.ewintory.yandex.mobilization.AppModule;
 import com.ewintory.yandex.mobilization.ui.fragment.ArtistsFragment;
 
 import javax.inject.Singleton;
