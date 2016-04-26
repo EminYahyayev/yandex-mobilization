@@ -27,8 +27,10 @@ import java.util.List;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.functions.Action1;
 
-public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder> {
+public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistHolder>
+        implements Action1<List<Artist>> {
 
     public interface OnArtistClickListener {
         OnArtistClickListener DUMMY = (artist, holder) -> {/** dummy */};
@@ -67,6 +69,11 @@ public final class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.Ar
             throw new IllegalArgumentException("mArtists==null, position=" + position);
 
         return mArtists.get(position);
+    }
+
+    @Override
+    public void call(@NonNull List<Artist> artists) {
+        setArtists(artists);
     }
 
     @Override

@@ -11,7 +11,7 @@ import com.ewintory.yandex.mobilization.utils.Utility;
 
 public final class ArtistItemAnimator extends DefaultItemAnimator {
 
-    private static final int ROWS_TO_ANIMATE = 10;
+    private static final int ROWS_TO_ANIMATE = 5;
 
     private int lastAddAnimatedItem;
 
